@@ -4,24 +4,24 @@ const puppeteer = require('puppeteer');
 
 const app = express();
 
-async function startBrowser(){
-	let browser;
-	try {
-	    console.log("Opening the browser......");
-	    browser = await puppeteer.launch({
-	        headless: false,
-	        args: ["--disable-setuid-sandbox"],
-	        'ignoreHTTPSErrors': true
-	    });
-	} catch (err) {
-	    console.log("Could not create a browser instance => : ", err);
-	}
-	return browser;
+async function startBrowser() {
+    let browser;
+    try {
+        console.log("Opening the browser......");
+        browser = await puppeteer.launch({
+            headless: false,
+            args: ["--disable-setuid-sandbox"],
+            'ignoreHTTPSErrors': true
+        });
+    } catch (err) {
+        console.log("Could not create a browser instance => : ", err);
+    }
+    return browser;
 }
 
 const scraperObject = {
     url: 'https://lol.fandom.com/wiki/LCS/2022_Season/Summer_Season',
-	async scraper(browser){
+    async scraper(browser) {
         try {
             let page = await browser.newPage();
             console.log(`Navigating to ${this.url}...`);
@@ -36,8 +36,8 @@ const scraperObject = {
                 return res;
             })
             let game = {};
-            for(let i = 0; i < team.length; i++) {
-                if(i % 2 == 0) {
+            for (let i = 0; i < team.length; i++) {
+                if (i % 2 == 0) {
                     game['game' + (i / 2 + 1)] =
                     {
                         "team1": team[i],
@@ -52,19 +52,19 @@ const scraperObject = {
         } finally {
             await browser.close();
         }
-	}
+    }
 }
 
-async function scrapeAll(browserInstance){
-	let browser;
-	try{
-		browser = await browserInstance;
-		let data = await scraperObject.scraper(browser);
-        return data;	
-	}
-	catch(err){
-		console.log("Could not resolve the browser instance => ", err);
-	}
+async function scrapeAll(browserInstance) {
+    let browser;
+    try {
+        browser = await browserInstance;
+        let data = await scraperObject.scraper(browser);
+        return data;
+    }
+    catch (err) {
+        console.log("Could not resolve the browser instance => ", err);
+    }
 }
 
 app.get("/scrape", async (req, res) => {
