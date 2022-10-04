@@ -68,11 +68,14 @@ async function scrapeAll(browserInstance) {
     }
 }
 
+app.get("/api", (req, res) => {
+    res.json({ status: "Server is working" });
+});
+
 app.get("/scrape", async (req, res) => {
     scraperObject.url = req.query.value;
     let browserInstance = await startBrowser();
     let data = await scrapeAll(browserInstance);
-    console.log(data)
     res.json(data);
 })
 

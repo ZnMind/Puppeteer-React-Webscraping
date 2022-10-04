@@ -9,7 +9,7 @@ const Scraper = props => {
 
     const getScrape = () => {
         setLoad("Loading...")
-        fetch(`/scrape?value=${props.url}`)
+        fetch(`https://express-webscraper.herokuapp.com/scrape?value=${props.url}`)
             .then(res => res.json())
             .then(body => {
                 setData(body)
