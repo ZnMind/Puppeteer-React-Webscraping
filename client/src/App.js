@@ -6,10 +6,14 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <div className='App-header'>
+        <h3>League of Legends (NA LCS)</h3>
         <p>
-          Crawler
+          Pro-play scraper
         </p>
+
+      </div>
+      <header className="App-body">
         <Select />
       </header>
     </div>

@@ -26,7 +26,7 @@ const Scraper = props => {
     }
 
     const Button = ({ text, onClick, className }) => {
-        return <button onClick={onClick}>{text}</button>
+        return <button onClick={onClick} className={className}>{text}</button>
     }
 
     return (

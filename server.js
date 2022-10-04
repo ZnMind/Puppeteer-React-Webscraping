@@ -1,8 +1,9 @@
 const express = require('express');
-const path = require('path');
+const cors = require('cors');
 const puppeteer = require('puppeteer');
 
 const app = express();
+app.use(cors());
 
 async function startBrowser() {
     let browser;

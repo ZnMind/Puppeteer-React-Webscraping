@@ -73,10 +73,27 @@ const Pagination = props => {
             </div>
 
             <div className="dataContainer d-flex">
+                <div className="dataheaderbox">
+                    <div className="info">
+                        Game #
+                    </div>
+                    <div className="info">
+                        Teams
+                    </div>
+                    <div className="info">
+                        Winner
+                    </div>
+                </div>
                 {getPaginatedData().map((data, index) => (
                     <div key={index} className="databox d-flex">
                         <div className="info">
-                            {`Game ${(currentPage - 1) * 10 + index + 1} : ${data[0]} - ${data[1]} => ${data[2]}`}
+                            {`Game `}<span className="num">{`${(currentPage - 1) * 10 + index + 1}`}</span>
+                        </div>
+                        <div className="info">
+                            {`${data[0]} - ${data[1]}`}
+                        </div>
+                        <div className="info">
+                            {`${data[2]}`}
                         </div>
                     </div>
                 ))}
