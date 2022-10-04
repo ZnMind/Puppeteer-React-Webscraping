@@ -35,8 +35,7 @@ const Pagination = props => {
     };
 
     return (
-        <div className="d-flex justify-center">
-
+        <div>
             <div className="header-box">
                 <div className="box">
                     {`Games : ${props.data.length}`}
@@ -44,6 +43,7 @@ const Pagination = props => {
             </div>
 
             <div className={styles.pagination}>
+
                 {/* previous button */}
                 <button
                     onClick={goToPreviousPage}
@@ -72,7 +72,7 @@ const Pagination = props => {
                 </button>
             </div>
 
-            <div className="dataContainer d-flex">
+            <div className="dataContainer">
                 <div className="dataheaderbox">
                     <div className="info">
                         Game #
@@ -85,7 +85,7 @@ const Pagination = props => {
                     </div>
                 </div>
                 {getPaginatedData().map((data, index) => (
-                    <div key={index} className="databox d-flex">
+                    <div key={index} className="databox">
                         <div className="info">
                             {`Game `}<span className="num">{`${(currentPage - 1) * 10 + index + 1}`}</span>
                         </div>
