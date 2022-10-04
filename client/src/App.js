@@ -8,10 +8,7 @@ function App() {
     <div className="App">
       <div className='App-header'>
         <h3>League of Legends (NA LCS)</h3>
-        <p>
-          Pro-play scraper
-        </p>
-
+        <p>Pro-play webscraper</p>
       </div>
       <header className="App-body">
         <Select />

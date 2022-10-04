@@ -9,27 +9,22 @@ const Scraper = props => {
 
     const getScrape = () => {
         setLoad("Loading...")
+        setScraped(false)
         fetch(`https://express-webscraper.herokuapp.com/scrape?value=${props.url}`)
             .then(res => res.json())
-            .then(body => console.log(body))
-            /* .then(body => {
+            .then(body => {
                 setData(body)
                 setScraped(true)
-                console.log(body)
-                console.log(Object.keys(body).length)
-            }) */
-    }
-
-    const checkServer = () => {
-        fetch("https://express-webscraper.herokuapp.com/api")
-            .then(res => res.json())
-            .then(body => console.log(body))
+            })
+            .catch(err => {
+                setLoad("Try Again")
+                console.log(err)
+            })
     }
 
     var valArr = Object.values(data)
     for (let i = 0; i < valArr.length; i++) {
         newArr.push(Object.values(valArr[i]))
-        //setData([...data, Object.values(valArr[i])])
     }
 
     const Button = ({ text, onClick, className }) => {
@@ -45,16 +40,12 @@ const Scraper = props => {
                     onClick={getScrape}
                     className="btn btn-primary"
                 />
-                <Button
-                    text="Server"
-                    onClick={checkServer}
-                />
             </div>
-            {scraped 
-            ? <Pagination 
-                data={newArr}
-            /> 
-            : load}
+            {scraped
+                ? <Pagination
+                    data={newArr}
+                />
+                : load}
         </div>
     )
 }
