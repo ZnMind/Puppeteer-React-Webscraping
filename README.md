@@ -8,4 +8,4 @@ cd client
 npm start   //runs react app on localhost:3000
 ```
 
-#### Heroku server is running at https://express-webscraper.herokuapp.com/
+#### Heroku server is running at https://express-webscraper.herokuapp.com/api
