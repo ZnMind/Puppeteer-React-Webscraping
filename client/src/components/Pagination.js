@@ -1,0 +1,89 @@
+import React, { useState } from "react";
+import styles from './Pagination.module.css';
+
+const Pagination = props => {
+    const [pages] = useState(Math.floor(props.data.length / 10) + 1)
+    const [currentPage, setCurrentPage] = useState(1);
+
+    function goToNextPage() {
+        setCurrentPage((page) => page + 1);
+    }
+
+    function goToPreviousPage() {
+        setCurrentPage((page) => page - 1);
+    }
+
+    function changePage(event) {
+        const pageNumber = Number(event.target.innerText);
+        setCurrentPage(pageNumber);
+    }
+
+    const getPaginatedData = () => {
+        const startIndex = currentPage * 10 - 10;
+        const endIndex = startIndex + 10;
+        return props.data.slice(startIndex, endIndex);
+    };
+
+    const getPaginationGroup = () => {
+        if (currentPage <= 6) {
+            return new Array(10).fill().map((_, index) => index + 1)
+        } else if (currentPage >= (props.data.length / 10) - 4) {
+            return new Array(10).fill(Math.floor(props.data.length / 10) - 4).map((element, index) => element - (4 - index))
+        } else {
+            return new Array(10).fill(currentPage - 5).map((element, index) => element + index)
+        }
+    };
+
+    return (
+        <div className="d-flex justify-center">
+
+            <div className="header-box">
+                <div className="box">
+                    {`Games : ${props.data.length}`}
+                </div>
+            </div>
+
+            <div className={styles.pagination}>
+                {/* previous button */}
+                <button
+                    onClick={goToPreviousPage}
+                    className={`${styles.prev} ${currentPage === 1 ? styles.disabled : ''}`}
+                >
+                    prev
+                </button>
+
+                {/* show page numbers */}
+                {getPaginationGroup().map((item, index) => (
+                    <button
+                        key={index}
+                        onClick={changePage}
+                        className={`${styles.paginationItem} ${currentPage === item ? styles.active : null}`}
+                    >
+                        <span id={item}>{item}</span>
+                    </button>
+                ))}
+
+                {/* next button */}
+                <button
+                    onClick={goToNextPage}
+                    className={`${styles.next} ${currentPage === pages ? styles.disabled : ''}`}
+                >
+                    next
+                </button>
+            </div>
+
+            <div className="dataContainer d-flex">
+                {getPaginatedData().map((data, index) => (
+                    <div key={index} className="databox d-flex">
+                        <div className="info">
+                            {`Game ${(currentPage - 1) * 10 + index + 1} : ${data[0]} - ${data[1]} => ${data[2]}`}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+        </div>
+    )
+}
+
+export default Pagination;
