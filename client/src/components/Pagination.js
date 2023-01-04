@@ -90,10 +90,11 @@ const Pagination = props => {
                             {`Game `}<span className="num">{`${(currentPage - 1) * 10 + index + 1}`}</span>
                         </div>
                         <div className="info">
-                            {`${data[0]} - ${data[1]}`}
+                            {/* `${data[0]} - ${data[1]}` */}
+                            {data}
                         </div>
                         <div className="info">
-                            {`${data[2]}`}
+                            {`${data}`}
                         </div>
                     </div>
                 ))}
